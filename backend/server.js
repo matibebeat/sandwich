@@ -1,47 +1,35 @@
-const http = require('http');
-const app = require('./app');
+const express = require('express');
+const bodyParser = require('body-parser');
+var cors = require('cors');
+const routehandler = require('./routes/handler.js');
+const mongoose = require('mongoose');
+const Schema= require('./models/Schemas.js');
 
-const normalizePort = val => {
-  const port = parseInt(val, 10);
+const{SchemaTypeOptions}=require('mongoose');
 
-  if (isNaN(port)) {
-    return val;
-  }
-  if (port >= 0) {
-    return port;
-  }
-  return false;
-};
-const port = normalizePort(process.env.PORT || '3000');
-app.set('port', port);
+require('dotenv').config();
 
-const errorHandler = error => {
-  if (error.syscall !== 'listen') {
-    throw error;
-  }
-  const address = server.address();
-  const bind = typeof address === 'string' ? 'pipe ' + address : 'port: ' + port;
-  switch (error.code) {
-    case 'EACCES':
-      console.error(bind + ' requires elevated privileges.');
-      process.exit(1);
-      break;
-    case 'EADDRINUSE':
-      console.error(bind + ' is already in use.');
-      process.exit(1);
-      break;
-    default:
-      throw error;
-  }
-};
+const app = express();
 
-const server = http.createServer(app);
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
+app.use(cors());
 
-server.on('error', errorHandler);
-server.on('listening', () => {
-  const address = server.address();
-  const bind = typeof address === 'string' ? 'pipe ' + address : 'port ' + port;
-  console.log('Listening on ' + bind);
+app.use('/', routehandler);
+
+
+
+mongoose.connect(process.env.DB_URI, { useNewUrlParser: true, useUnifiedTopology: true}).then(() => {
+    console.log('DB Connected');
+}).catch((err) => {
+    console.log(err);
 });
 
-server.listen(port);
+
+
+const PORT = 4000;
+
+app.listen(PORT, () => {
+    console.log(`Server is running on port ${PORT}`);
+});
+

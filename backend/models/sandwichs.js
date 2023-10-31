@@ -1,12 +1,33 @@
 const mongoose = require('mongoose');
-
 const sandwichSchema = mongoose.Schema({
-    title: { type: String, required: true },
-    description: { type: String, required: true },
-    ingredients: { type: String, required: true },
-    imageUrl: { type: String, required: true },
-    price: { type: Number, required: true },
-    InStock: { type: Number, required: true },
+    name: {
+        type: String,
+        required: true
+    },
+    bread: {
+        type: String,
+        required: true
+    },
+    meat: {
+        type: String,
+        required: true
+    },
+    cheese: {
+        type: String,
+        required: true
+    },
+    toppings: {
+        type: String,
+        required: true
+    },
+    condiments: {
+        type: String,
+        required: true
+    },
+    price: {
+        type: Number,
+        required: true
+    },
 });
-
-module.exports = mongoose.model('Sandwich', sandwichSchema);
+const sandwiches = mongoose.model('sandwiches', sandwichSchema);
+module.exports = sandwiches

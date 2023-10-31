@@ -10,8 +10,7 @@
     <div class="wrapper">
       <img :src="this.sand.image" alt="" />
       <div class="infos">
-        <p class="vegan" v-if="this.sand.vegan">Végétarien</p>
-        <p class="stock" v-if="this.sand.stock">En stock</p>
+      <IngredientLogo v-for="ingredient in this.sand.ingredients" :key="ingredient" :ingredient="ingredient" />
       </div>
       <div class="actions">
         <button>Ajouter au panier</button>
@@ -23,8 +22,11 @@
 </template>
 
 <script>
+import IngredientLogo from '../components/IngredientLogo.vue' 
+
 export default {
   name: "OneSandwicheView",
+  components: { IngredientLogo },
   data(){
     return {
       sand: {
@@ -36,7 +38,7 @@ export default {
     this.sand =   {     id: 1,
         name: "Sandwich triangle",
         price: 5,
-        ingredients: ["pain", "salade", "tomate"],
+        ingredients: ["pain", "salade", "tomate",'steack'],
         image:
           "https://recipes.timesofindia.com/thumb/83740315.cms?width=1200&height=900",
         vegan: false,
@@ -96,7 +98,6 @@ img{
   width:30%;
   display: flex;  
   flex-direction: column;
-  justify-content: space-between;
   align-items: center;
   /*make the heigt, the same as the image*/
   height: 150px;
@@ -105,11 +106,7 @@ img{
   border-radius: 20px;
 }
 
-.stock{
-  color: green;
-  font-size: 1.6em;
-  font-weight: 800;
-}
+
 
 .actions{
   background-color: white;

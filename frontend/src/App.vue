@@ -30,13 +30,14 @@ import { RouterLink, RouterView } from "vue-router";
         <RouterLink to="/terms">Terms</RouterLink>
         <RouterLink to="/privacy">Privacy</RouterLink>
     </div>
-    <div class="item">
-      <h3>Follow us</h3>
-      <a href="https://www.facebook.com/">Facebook</a>
-      <a href="https://www.instagram.com/">Instagram</a>
-      <a href="https://twitter.com/">Twitter</a>
-    </div>
+      <div class="item">
+        <h3>Follow us</h3>
+        <a href="https://www.facebook.com/">Facebook</a>
+        <a href="https://www.instagram.com/">Instagram</a>
+        <a href="https://twitter.com/">Twitter</a>
+      </div>
   </footer>
+  
 </template>
 
 <style scoped>

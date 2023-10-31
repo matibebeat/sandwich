@@ -8,16 +8,27 @@
         <option value="">Nom croissant</option>
         <option value="">Nom décroissant</option>
       </select>
-      <input type="checkbox" name="vegan" id="" v-model="vegan"  @change="filter()"/>
+      <input
+        type="checkbox"
+        name="vegan"
+        id=""
+        v-model="vegan"
+        @change="filter()"
+      />
       <label for="vegan">Végétarien</label>
-      <input type="checkbox" name="stock" id="" v-model="stock" @change="filter()"/>
+      <input
+        type="checkbox"
+        name="stock"
+        id=""
+        v-model="stock"
+        @change="filter()"
+      />
       <label for="stock">En stock</label>
       <input type="text" name="search" id="search" placeholder="Search" />
     </form>
     <div class="grid">
       <SandwichCard
         v-for="sand in sandwiches"
-        
         :key="sand.id"
         :id="sand.id"
         :name="sand.name"
@@ -39,7 +50,7 @@ import SandwichCard from "../components/SandwichCard.vue";
 export default {
   name: "ProductsView",
   components: { SandwichCard },
-  data: function () {
+  data() {
     return {
       vegan: false,
       stock: false,
@@ -70,8 +81,9 @@ export default {
           id: 3,
           name: "Sandwich ",
           price: 1.5,
-          ingredients: ["pain","jambon"],
-          image: "https://upload.wikimedia.org/wikipedia/commons/2/24/Bologna_sandwich.jpg",
+          ingredients: ["pain", "jambon"],
+          image:
+            "https://upload.wikimedia.org/wikipedia/commons/2/24/Bologna_sandwich.jpg",
           vegan: false,
           stock: false,
           show: true,
@@ -81,7 +93,8 @@ export default {
           name: "Sandwich 4",
           price: 5,
           ingredients: ["pain", "salade", "tomate"],
-          image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ2cfu1kUkWTGxr-z2uyf9N3wmjRpjvaW6mzQRzaEnN6Q&s",
+          image:
+            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ2cfu1kUkWTGxr-z2uyf9N3wmjRpjvaW6mzQRzaEnN6Q&s",
           vegan: true,
           stock: true,
           show: true,
@@ -89,18 +102,23 @@ export default {
       ],
     };
   },
+  mounted() {
+    console.log("cc");
+    console.log(this.sandwiches);
+    /*fetch data from */
+  },
   methods: {
-    filter(){
-      this.sandwiches.forEach(sandwich => {
-        if(this.vegan && !sandwich.vegan){
+    filter() {
+      this.sandwiches.forEach((sandwich) => {
+        if (this.vegan && !sandwich.vegan) {
           sandwich.show = false;
-        }else if(this.stock && !sandwich.stock){
+        } else if (this.stock && !sandwich.stock) {
           sandwich.show = false;
-        }else{
+        } else {
           sandwich.show = true;
         }
       });
-    }
+    },
   },
 };
 </script>
