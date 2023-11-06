@@ -5,11 +5,11 @@ const SandwichSchema = mongoose.Schema({
     price: {type: Number, required: true},
     description: {type: String, required: true},
     image: {type: String, required: true},
-    ingredients: {type: String, required: true},
+    ingredients: {type: Array, required: true},
 });
 const OrderSchema = mongoose.Schema({
     idUser: {type: String, required: true},
-    Sandwichs : {type: Array, required: true},
+
     price: {type: Number, required: true},
     date: {type: Date, required: true},
 });

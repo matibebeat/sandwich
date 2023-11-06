@@ -17,7 +17,7 @@ import { RouterLink, RouterView } from "vue-router";
     </div>
   </header>
 
-  <RouterView class="site" />
+  <RouterView class="site" :User="this.user"/>
   <footer>
     <div class="item">
       <h3>Navigation</h3>
@@ -39,6 +39,32 @@ import { RouterLink, RouterView } from "vue-router";
   </footer>
   
 </template>
+
+<script>
+
+export default {
+  name: "App",
+  components: {
+    RouterLink,
+    RouterView,
+  },
+  data() {
+    return {
+      user:{
+        name: "John Doe",
+        email: "  ",
+        password: "  ",
+        role: "  ",
+        id: 1,
+      }
+    };
+  },
+};
+
+
+</script>
+
+
 
 <style scoped>
 header {

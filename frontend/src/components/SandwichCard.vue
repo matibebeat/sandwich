@@ -1,5 +1,5 @@
 <template>
-  <router-link :to="'/products/'+this.id" class="sandwich" v-if="this.show" >
+  <router-link :to="'/products/'+this.id" class="sandwich" v-if="this.show" :alt="this.description">
     <img
       :src="this.image"
       alt=""
@@ -22,6 +22,7 @@ export default {
         id: Number,
         name: String,
         price: Number,
+      description: String,
         ingredients: Array,
         image: String,
         vegan: Boolean,
@@ -61,6 +62,7 @@ export default {
   }
   
   .sandwichTitle {
+
     display: flex;
     flex-direction: row;
     justify-content: space-between;

@@ -2,36 +2,15 @@
   <div class="orders">
     <div class="titre">
       <h1>Past orders</h1>
-      <p>orders of Mathis</p>
+      <p>orders of {{this.User.name}}</p>
     </div>
     <ul>
-      <li class="order">
-        <h2>11/08/2022 <span class="size">3 sandwiches</span></h2>
+      <li class="order" v-for="order in orders" :key="order.id">
+        <h2>{{ order.date }} <span class="size">{{order.Sandwichs.length}} sandwiches</span> </h2>
         <ul>
-            <li class="sandInfos">
-                <p class="sandName">Sandwiche Triangle</p>
-                <p class="sandPrice">3,50€</p>
-            </li>
-            <li class="sandInfos">
-                <p class="sandName">Sandwiche Italien</p>
-                <p class="sandPrice">4,50€</p>
-            </li>
-            <li class="sandInfos">
-                <p class="sandName">Sandwiche Italien</p>
-                <p class="sandPrice">4,50€</p>
-            </li>
-        </ul>
-      </li>
-      <li class="order">
-        <h2>09/08/2022 <span class="size">2 sandwiches</span></h2>
-        <ul>
-            <li class="sandInfos">
-                <p class="sandName">Sandwiche Triangle</p>
-                <p class="sandPrice">3,50€</p>
-            </li>
-            <li class="sandInfos">
-                <p class="sandName">Sandwiche Italien</p>
-                <p class="sandPrice">4,50€</p>
+            <li class="sandInfos" v-for="sandwich in order.Sandwichs" :key="sandwich.id">
+                <p class="sandName">{{sandwich.name}}</p>
+                <p class="sandPrice">{{sandwich.price}} €</p>
             </li>
         </ul>
       </li>
@@ -40,7 +19,46 @@
 </template>
 
 <script>
-export default {};
+import axios from "axios";
+export default {
+  name: "OrdersView",
+  props: {
+    User: {
+      type: Object,
+      required: true,
+    },
+  },
+  data: function () {
+    return {
+      orders: [],
+    };
+  },
+  mounted() {
+    axios
+      .get("http://localhost:4000/api/order/"+this.User.id)
+      .then((response) => {
+        this.orders = response.data;
+        console.log(this.orders);
+        for (let i = 0; i < this.orders.length; i++) {
+          this.orders[i].date = this.orders[i].date.slice(0, 10);
+          this.orders[i].price = this.orders[i].price + "€";
+          for (let j = 0; j < this.orders[i].Sandwichs.length; j++) {
+            axios.get("http://localhost:4000/api/sandwich/"+this.orders[i].Sandwichs[j])
+            .then((response2) => {
+                /*ajoute le sandwich au tableau de sandwichs*/
+                this.orders[i].Sandwichs[j] = response2.data;
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+          }
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }
+};
 </script>
 
 <style scoped>

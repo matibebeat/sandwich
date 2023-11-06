@@ -33,6 +33,7 @@
         :id="sand.id"
         :name="sand.name"
         :image="sand.image"
+        :description="sand.description"
         :ingredients="sand.ingredients"
         :price="sand.price"
         :stock="sand.stock"
@@ -46,6 +47,7 @@
 <script>
 import { vModelCheckbox } from "vue";
 import SandwichCard from "../components/SandwichCard.vue";
+import axios from "axios";
 
 export default {
   name: "ProductsView",
@@ -104,8 +106,18 @@ export default {
   },
   mounted() {
     console.log("cc");
-    console.log(this.sandwiches);
-    /*fetch data from */
+    axios
+      .get("http://localhost:4000/api/sandwich")
+      .then((response) => {
+        this.sandwiches = response.data;
+        console.log(this.sandwiches);
+        for (let i = 0; i < this.sandwiches.length; i++) {
+          this.sandwiches[i].show = true;
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   },
   methods: {
     filter() {

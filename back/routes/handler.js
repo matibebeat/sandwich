@@ -13,27 +13,50 @@ router.use((req, res, next) => {
 
 router.get('/', (req, res) => {
     res.end('This is my root API http response');});
-router.get('/sandwiches', (req, res) => {
+router.get('/sandwich', (req, res) => {
     Schemas.Sandwich.find().then((sandwiches) => {
         res.json(sandwiches);
     }).catch((err) => {
         res.status(500).send(err.message);
     });
 });
+router.post('/sandwich', (req, res) => {
+    const sandwich = new Schemas.Sandwich({
+        name: req.body.name,
+        price: req.body.price,
+        description: req.body.description,
+        image: req.body.image,
+        ingredients: req.body.ingredients,
+    });
+    sandwich.save().then((data) => {
+        res.json(data);
+    }).catch((err) => {
+        res.status(500).send(err.message);
+    });
+}
+);
+router.get('/sandwich/:id', (req, res) => {
+    Schemas.Sandwich.findById(req.params.id).then((sandwich) => {
+        res.json(sandwich);
+    }).catch((err) => {
+        res.status(500).send(err.message);
+    });
+}
+);
 
 router.get('/order/:id', (req, res) => {
     /*return qll the orders in mongodb that have the id in userId*/
     Schemas.Order.find({idUser: req.params.id}).then((orders) => {
-        for(let i = 0; i < orders.length; i++) {
-            for(let j = 0; j < orders[i].Sandwichs.length; j++) {
-                Schemas.Sandwich.findById(orders[i].Sandwichs[j].idSandwich).then((sandwich) => {
-                    orders[i].Sandwichs[j].name = sandwich.name;
-                    orders[i].Sandwichs[j].image = sandwich.image;
-                }).catch((err) => {
-                    res.status(500).send(err.message);
-                });
-            }
-        }
+        res.json(orders);
+    }
+    ).catch((err) => {
+        res.status(500).send(err.message);
+    });
+}
+);
+
+router.get('/order', (req, res) => {
+    Schemas.Order.find().then((orders) => {
         res.json(orders);
     }
     ).catch((err) => {
