@@ -12,12 +12,14 @@ import { RouterLink, RouterView } from "vue-router";
       <RouterLink to="/shops">shops</RouterLink>
     </nav>
     <div class="UserNav">
-      <RouterLink to="/login">Login</RouterLink>
-      <RouterLink to="/register">Register</RouterLink>
+      <RouterLink to="/login" v-if="!this.connected">Login</RouterLink>
+      <RouterLink to="/register" v-if="!this.connected">Register</RouterLink>
+      <RouterLink to="/profile" v-show="this.connected" id="profile">{{ this.user.name }}</RouterLink>
+      <a href="#" v-if="this.connected" @click="logout">Logout</a>
     </div>
   </header>
 
-  <RouterView class="site" :User="this.user"/>
+  <RouterView class="site" :User="this.user" @login="log()"/>
   <footer>
     <div class="item">
       <h3>Navigation</h3>
@@ -50,14 +52,68 @@ export default {
   },
   data() {
     return {
+      connected: false,
       user:{
         name: "John Doe",
         email: "  ",
         password: "  ",
         role: "  ",
         id: 1,
+        admin: true,
       }
     };
+  },
+
+  mounted() {
+    try{
+      this.user = JSON.parse(localStorage.getItem("user"));
+      console.log(this.user);
+      if(this.user==null){
+        this.user = {
+          name: "John Doe",
+          email: "  ",
+          password: "  ",
+          role: "  ",
+          id: 1,
+          admin: false,
+        };
+        this.connected = false;
+      }
+      else{
+        this.connected = true;
+      }
+    }
+    catch (e) {
+      this.user = {
+        name: "John Doe",
+        email: "  ",
+        password: "  ",
+        role: "  ",
+        id: 1,
+        admin: false,
+      };
+      this.connected = false;
+    }
+    console.log(this.connected);
+  },
+  methods: {
+    logout() {
+      localStorage.removeItem("user");
+      localStorage.removeItem("token");
+      this.connected = false;
+      this.user = {
+        name: "John Doe",
+        email: "  ",
+        password: "  ",
+        role: "  ",
+        id: 1,
+        admin: false,
+      };
+    },
+    log() {
+      this.user = JSON.parse(localStorage.getItem("user"));
+      this.connected = true;
+    },
   },
 };
 
@@ -171,5 +227,19 @@ a{
   font-weight: 400;
   font-size: 1.2em;
   text-decoration: red;
+}
+button{
+  margin-left: 1em;
+  border: none;
+  background: red;
+  padding: 15px 20px;
+  border-radius: 20px;
+  text-decoration: none;
+  color: white;
+}
+
+#profile{
+    background-color:  rgb(159, 246, 246);
+  color: black;
 }
 </style>

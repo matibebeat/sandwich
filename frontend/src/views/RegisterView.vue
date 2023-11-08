@@ -1,10 +1,19 @@
-/*make a vue page to registe, with all the fonction to send a register request*/
-
-<template>
+  <template>
   <div class="register">
     <div class="register__container">
       <h1 class="register__title">Sign up</h1>
       <form class="register__form" @submit.prevent="register">
+        <div class="form__group">
+          <label for="name">Name</label>
+          <input
+            type="text"
+            id="name"
+            v-model="name"
+            class="form__input"
+            placeholder="Name"
+            required
+          />
+        </div>
         <div class="form__group">
           <label for="email">Email</label>
           <input
@@ -28,13 +37,24 @@
           />
         </div>
         <div class="form__group">
-          <label for="passwordConfirm">Confirm password</label>
+          <label for="address">Address</label>
           <input
-            type="password"
-            id="passwordConfirm"
-            v-model="passwordConfirm"
+            type="text"
+            id="address"
+            v-model="address"
             class="form__input"
-            placeholder="Confirm password"
+            placeholder="Address"
+            required
+          />
+        </div>
+        <div class="form__group">
+          <label for="phone">Phone</label>
+          <input
+            type="text"
+            id="phone"
+            v-model="phone"
+            class="form__input"
+            placeholder="Phone"
             required
           />
         </div>
@@ -46,26 +66,30 @@
   </div>
 </template>
 
-<script>
-/*import axios*/
+  <script>
 import axios from "axios";
 
 export default {
   name: "RegisterView",
   data() {
     return {
+      name: "",
       email: "",
       password: "",
       passwordConfirm: "",
+      address: "",
+      phone: "",
     };
   },
   methods: {
     register() {
       axios
-        .post("http://localhost:3000/api/auth/register", {
+        .post("http://localhost:4000/api/profile/register", {
+          name: this.name,
           email: this.email,
           password: this.password,
-          passwordConfirm: this.passwordConfirm,
+          address: this.address,
+          phone: this.phone,
         })
         .then((response) => {
           localStorage.setItem("token", response.data.token);
@@ -79,7 +103,8 @@ export default {
 };
 </script>
 
-<style scoped>
+
+<style scoped >
 .register {
   display: flex;
   justify-content: center;
@@ -140,4 +165,3 @@ export default {
   width: 100%;
 }
 </style>
-```

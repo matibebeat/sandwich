@@ -15,13 +15,17 @@
         </ul>
       </li>
     </ul>
+    <loader-anim class="loader" v-if="this.loading"/>
   </div>
+
 </template>
 
 <script>
 import axios from "axios";
+import LoaderAnim from "@/components/LoaderAnim.vue";
 export default {
   name: "OrdersView",
+  components: {LoaderAnim},
   props: {
     User: {
       type: Object,
@@ -31,9 +35,11 @@ export default {
   data: function () {
     return {
       orders: [],
+      loading: false,
     };
   },
   mounted() {
+    this.loading = true;
     axios
       .get("http://localhost:4000/api/order/"+this.User.id)
       .then((response) => {
@@ -47,6 +53,7 @@ export default {
             .then((response2) => {
                 /*ajoute le sandwich au tableau de sandwichs*/
                 this.orders[i].Sandwichs[j] = response2.data;
+                this.loading = false;
             })
             .catch((error) => {
                 console.log(error);
@@ -91,7 +98,7 @@ h2{
     padding: 1em;
     margin: 0;
     width:92%;
-    font-weight: 6 00;
+    font-weight: 600;
     padding-bottom: 0;
     border-bottom: #333 solid 1px;
 }

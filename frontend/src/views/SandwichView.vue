@@ -7,11 +7,7 @@
             </div>
             <div class="sandwich-details">
                 <p> Name: {{ sandwich.name }} </p>
-                <p> Bread: {{ sandwich.bread }} </p>
-                <p> Meat: {{ sandwich.meat }} </p>
-                <p> Cheese: {{ sandwich.cheese }} </p>
-                <p> Vegetables: {{ sandwich.vegetables }} </p>
-                <p> Sauce: {{ sandwich.sauce }} </p>
+                <p> Price: {{ sandwich.price }}</p>
             </div>
         </div>
     </div>

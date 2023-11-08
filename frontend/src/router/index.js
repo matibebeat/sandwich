@@ -10,22 +10,29 @@ const router = createRouter({
       component: HomeView
     },
     {
+      path: '/products/:id',
+      name: 'product',
+      component: () => import('../views/SandwichView.vue')
+    },
+    {
       path: '/products',
-      name: 'products',
+      name: 'productsolo',
       component: () => import('../views/ProductsView.vue')
     },
     {
-      path: '/products/:id',
-      name: 'product',
-      component: () => import('../views/OneSandwicheView.vue')
+      path: '/modify/:id',
+      name: 'modify',
+      component: () => import('../views/ModifySandwichView.vue')
     },
+
     {
       path: '/orders',
       name: 'orders',
-      component: () => import('../views/OrdersView.vue')
+      component: () => import('../views/OrdersView.vue'),
+      meta: { requiresAuth: true }
     },
     {
-      path: '/shops' ,
+      path: '/shops',
       name: 'shops',
       component: () => import('../views/ShopView.vue')
     },
@@ -52,10 +59,31 @@ const router = createRouter({
     {
       name: "admin",
       path: "/admin",
-      component:()=> import('../views/AdminView.vue')
+      component: () => import('../views/AdminView.vue'),
+      meta: { requiresAuth: true }
+    },
+    {
+      name: 'profile',
+      path: "/profile",
+      component: () => import('../views/ProfileView.vue'),
+      meta: {requiresAuth: true}
     }
 
   ]
 })
 
-export default router
+
+router.beforeEach((to, from, next) => {
+  if (to.meta.requiresAuth) {
+    const token = localStorage.getItem('token');
+    if (token) {
+      next();
+    } else {
+      next('/login');
+    }
+  } else {
+    next();
+    }
+}
+);
+  export default router;

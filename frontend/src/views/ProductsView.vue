@@ -28,9 +28,10 @@
     </form>
     <div class="grid">
       <SandwichCard
+          :admin="this.User.admin"
         v-for="sand in sandwiches"
-        :key="sand.id"
-        :id="sand.id"
+        :key="sand._id"
+        :id="sand._id"
         :name="sand.name"
         :image="sand.image"
         :description="sand.description"
@@ -52,6 +53,9 @@ import axios from "axios";
 export default {
   name: "ProductsView",
   components: { SandwichCard },
+  props: {
+    User: Object,
+  },
   data() {
     return {
       vegan: false,

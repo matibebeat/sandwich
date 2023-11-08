@@ -50,15 +50,28 @@ export default {
   methods: {
     login() {
       axios
-        .post("http://localhost:3000/api/auth/login", {
+        .post("http://localhost:4000/api/profile/login", {
           email: this.email,
           password: this.password,
         })
         .then((response) => {
           localStorage.setItem("token", response.data.token);
+          console.log(response.data);
+          var user={
+            name:response.data.name,
+            email:response.data.email,
+            address:response.data.address,
+            phone:response.data.phone,
+            admin:response.data.isAdmin,
+            id:response.data._id,
+          }
+          localStorage.setItem("user", JSON.stringify(user));
+          this.$emit("login");
+
           this.$router.push("/");
         })
         .catch((error) => {
+          alert('adresse mail ou mdp incorect')
           console.log(error);
         });
     },

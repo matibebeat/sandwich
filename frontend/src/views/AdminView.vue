@@ -111,6 +111,9 @@
 import axios from "axios";
 export default {
   name: "AdminView",
+  props: {
+    User: Object,
+  },
   data() {
     return {
       orders: [],

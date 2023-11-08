@@ -1,9 +1,27 @@
 <template>
   <router-link :to="'/products/'+this.id" class="sandwich" v-if="this.show" :alt="this.description">
-    <img
-      :src="this.image"
-      alt=""
-    />
+    <div class="image">
+      <img
+          :src="this.image"
+          alt=""
+      />
+
+      <p>
+        {{ this.description }}
+      </p>
+      <router-link :to="'/modify/'+this.id">
+        <img
+            v-if="this.admin"
+            src="../assets/reglages.png"
+            alt="reglages"
+            class="reglages"
+
+        />
+      </router-link>
+    </div>
+
+
+
     <div class="sandwichTitle">
       <h3>{{this.name}}</h3>
       <p class="prix">
@@ -19,6 +37,7 @@
 export default {
     name: "SandwichCard",
     props: {
+      admin: Boolean,
         id: Number,
         name: String,
         price: Number,
@@ -54,11 +73,60 @@ export default {
     transition: 0.3s;
   }
 
-  .sandwich img {
+  .sandwich .image {
     width: 100%;
     height: 70%;
     object-fit: cover;
     border-radius: 10px 10px 0px 0px;
+  }
+
+  .sandwich .image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 10px 10px 0px 0px;
+  }
+
+  .sandwich .image .reglages {
+    width: 50px;
+    height: 50px;
+    position: absolute;
+    top: 4px;
+    right: 4px;
+    margin: 0;
+    padding: 0;
+    display: none;
+  }
+
+  .sandwich .image .reglages:hover {
+    transform: scale(1.2);
+    transition: 0.3s;
+  }
+
+  .sandwich:hover .image .reglages {
+    display: block;
+  }
+
+  .sandwich .image p {
+    display: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+
+  .sandwich:hover .image p{
+    display: block;
+    background-color: rgba(0, 0, 0, 0.5);
+    width: 96%;
+    height: 70%;
+    margin-top: 0;
+    border-radius: 10px 10px 0px 0px;
+    /*pu 2% padding everywhere but on the bottom*/
+    padding: 0% 2% 0 2%;
+    color: white;
+    font-size: 1.4em;
+
+    word-wrap: break-word
   }
   
   .sandwichTitle {
