@@ -47,7 +47,7 @@
 
 <script>
 import { vModelCheckbox } from "vue";
-import SandwichCard from "../components/SandwichCard.vue";
+import SandwichCard from "../../components/Sandwichs/SandwichCard.vue";
 import axios from "axios";
 
 export default {

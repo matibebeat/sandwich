@@ -1,5 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import HomeView from '../views/HomeView.vue'
+import HomeView from '../views/main/HomeView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -12,66 +12,66 @@ const router = createRouter({
     {
       path: '/products/:id',
       name: 'product',
-      component: () => import('../views/SandwichView.vue')
+      component: () => import('../views/main/SandwichView.vue')
     },
     {
       path: '/products',
       name: 'productsolo',
-      component: () => import('../views/ProductsView.vue')
+      component: () => import('../views/main/ProductsView.vue')
     },
     {
       path: '/modify/:id',
       name: 'modify',
-      component: () => import('../views/ModifySandwichView.vue')
+      component: () => import('../views/admin/ModifySandwichView.vue')
     },
 
     {
       path: '/orders',
       name: 'orders',
-      component: () => import('../views/OrdersView.vue'),
+      component: () => import('../views/main/OrdersView.vue'),
       meta: { requiresAuth: true }
     },
     {
       path: '/shops',
       name: 'shops',
-      component: () => import('../views/ShopView.vue')
+      component: () => import('../views/main/ShopView.vue')
     },
     {
       name: 'login',
       path: '/login',
-      component: () => import('../views/LoginView.vue')
+      component: () => import('../views/profile/LoginView.vue')
     },
     {
       name: 'register',
       path: '/register',
-      component: () => import('../views/RegisterView.vue')
+      component: () => import('../views/profile/RegisterView.vue')
     },
     {
       name: 'terms',
       path: '/terms',
-      component: () => import('../views/TermsView.vue')
+      component: () => import('../views/politics/TermsView.vue')
     },
     {
       name: 'test',
       path: '/test',
-      component: () => import('../views/SandwichView.vue')
+      component: () => import('../views/main/SandwichView.vue')
     },
     {
       name: "admin",
       path: "/admin",
-      component: () => import('../views/AdminView.vue'),
+      component: () => import('../views/admin/AdminView.vue'),
       meta: { requiresAuth: true }
     },
     {
       name: 'profile',
       path: "/profile",
-      component: () => import('../views/ProfileView.vue'),
+      component: () => import('../views/profile/ProfileView.vue'),
       meta: {requiresAuth: true}
     },
     {
       name: 'privacy',
         path: "/privacy",
-        component: () => import('../views/PrivacyView.vue')
+        component: () => import('../views/politics/PrivacyView.vue')
     },
   ]
 })

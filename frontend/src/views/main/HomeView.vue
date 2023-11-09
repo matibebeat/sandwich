@@ -2,7 +2,7 @@
   <div class="home">
     <h1>Home of the best sandwiches ever,</h1>
     <h1>Try it and you will love</h1>
-    <img src="../assets/sandwich.svg" alt="sandwich" />
+    <img src="../../assets/sandwich.svg" alt="sandwich" />
     <p class="main">
       Lorem ipsum dolor sit a met, consectetur adipiscing elit. Nullam auctor,
       nisl eget ultrum dolor sit a met, consectetur adipiscing elit. Nullicies
@@ -16,84 +16,47 @@
     <div class="block2">
       <h2>Our lifestyle</h2>
       <div class="wrapper2">
-        <div class="wrapper2item">
-          <h3>Peacefull</h3>
-          <img src="../assets/tomato.svg" alt="" />
-          <p>
-            lorem ipsum dolor sit a met, consectetur adipiscing elit. Nullam
-            auctor, nisl eget ultrum dolor sit a met, consectetur adipiscing
-            elit. Nullicies aliquam, nunc sapien aliquet nunc, eget luctus nisl
-            nunc eum dolor sit a met, consectetur adipiscing elit. Nullget nisl.
-          </p>
-        </div>
-        <div class="wrapper2item">
-          <h3>Peacefull</h3>
-          <img src="../assets/steak.svg" alt="" id="steak" />
-          <p>
-            lorem ipsum dolor sit a met, consectetur adipiscing elit. Nullam
-            auctor, nisl eget ultrum dolor sit a met, consectetur adipiscing
-            elit. Nullicies aliquam, nunc sapien aliquet nunc, eget luctus nisl
-            nunc eum dolor sit a met, consectetur adipiscing elit. Nullget nisl.
-          </p>
-        </div>
-        <div class="wrapper2item">
-          <h3>Peacefull</h3>
-          <img src="../assets/salad.png" alt="" id="salad" />
-          <p>
-            lorem ipsum dolor sit a met, consectetur adipiscing elit. Nullam
-            auctor, nisl eget ultrum dolor sit a met, consectetur adipiscing
-            elit. Nullicies aliquam, nunc sapien aliquet nunc, eget luctus nisl
-            nunc eum dolor sit a met, consectetur adipiscing elit. Nullget nisl.
-          </p>
-        </div>
+        <HomeInformations msg="lorem ipsum dolor sit a met, consectetur adipiscing elit. Nulla auctor, nisl eget ultrum dolor sit a met, consectetur  elit. Nullicies aliquam, nunc sapien aliquet nunc, eget luctus nislnunc eum dolor sit a met, consectetur adipiscing elit. Nullget nisl." url="tomato" Titre="Peacefull" />
+
+        <HomeInformations msg="lorem ipsum dolor sit a met, consectetur adipiscing elit. Nulla auctor, nisl eget ultrum dolor sit a met, consectetur  elit. Nullicies aliquam, nunc sapien aliquet nunc, eget luctus nislnunc eum dolor sit a met, consectetur adipiscing elit. Nullget nisl." url="steack" Titre="steak" />
+
+        <HomeInformations msg="lorem ipsum dolor sit a met, consectetur adipiscing elit. Nulla auctor, nisl eget ultrum dolor sit a met, consectetur  elit. Nullicies aliquam, nunc sapien aliquet nunc, eget luctus nislnunc eum dolor sit a met, consectetur adipiscing elit. Nullget nisl." url="salad" Titre="salad" />
       </div>
     </div>
     <div class="block3">
       <h2>Our reviews</h2>
       <div class="wrapper3">
-        <div class="wrapper3item">
-          <div>
-            <h4>Paul dupond</h4>
-            <star-rate class="starRate" :rate="4"></star-rate>
-          </div>
+        <AvisComponent v-for="review in reviews" :review="review" />
 
-          <p>
-            J'ai rarement mangé un truc aussi bon putain.orem ipsum dolor sit a
-            met, consectetur adipiscing elit. Nullam auctor, nisl eget ultrum
-            dolor sit a met, consectetur alget nisl.
-          </p>
-        </div>
-        <div class="wrapper3item">
-          <div>
-            <h4>John DOE</h4>
-          </div>
-          <p>
-            lor sit a met, consectetur adipiscing elit. Nullicies aliquam, nunc
-            sapien aliquet nunc, eget luctus nisl nunc eum dolor sit a met,
-            consectetur adipiscing elit. Nul
-          </p>
-        </div>
-        <div class="wrapper3item">
-          <div>
-            <h4>Mathis bg</h4>
-          </div>
-          <p>
-            lor sit a met, consectetur adipiscing elit. Nullicies aliquam, nunc
-            sapien aliquet nunc, eget luctus nisl nunc eum dolor sit a met,
-            consectetur adipiscing elit. Nul
-          </p>
-        </div>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import StarRate from "../components/StarRate.vue";
+import AvisComponent from "@/components/Home/AvisComponent.vue";
+import axios from "axios";
+import HomeInformations from "@/components/Home/HomeInformations.vue";
 
 export default {
   name: "HomeView",
-  components: { StarRate },
+  components: {HomeInformations, AvisComponent },
+  data: function () {
+    return {
+      reviews: [],
+    };
+  },
+  mounted() {
+    axios
+      .get("http://localhost:4000/api/review")
+      .then((response) => {
+        this.reviews = response.data;
+        console.log(this.reviews);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }
 };
 </script>
 

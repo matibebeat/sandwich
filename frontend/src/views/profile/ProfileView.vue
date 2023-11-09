@@ -76,7 +76,7 @@
 
 </template>
 <script>
-import AlertComponent from "@/components/AlertComponent.vue";
+import AlertComponent from "@/components/utils/AlertComponent.vue";
 import axios from "axios";
 export default {
   name: 'ProfileView',
@@ -218,7 +218,16 @@ export default {
   display: block;
   width: 100%;
 }
+button{
+  margin-top: 20px;
 
+  border-radius: 11px;
+  padding:       10px 25px;
+  color:         #333;
+  display:       inline-block;
+  font:          normal bold 14px/1  "Open Sans", sans-serif;
+  text-align:    center;
+}
 
 
 </style>

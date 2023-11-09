@@ -12,7 +12,7 @@
       <router-link :to="'/modify/'+this.id">
         <img
             v-if="this.admin"
-            src="../assets/reglages.png"
+            src="../../assets/reglages.png"
             alt="reglages"
             class="reglages"
 

@@ -31,39 +31,7 @@
       <label for="image">Image:</label>
       <input type="text" id="image" name="image" v-model="proto.image">
       <label for="ingredients">Ingredients:</label>
-      <div class="wrapper2">
-        <div class="ingredients">
-          <input type="checkbox" id="ingredient1" name="ingredient1" value="ingredient1">
-          <label for="ingredient1">ingredient1</label>
-        </div>
-        <div class="ingredients">
-          <input type="checkbox" id="ingredient2" name="ingredient2" value="ingredient2">
-          <label for="ingredient2">ingredient2</label>
-        </div>
-        <div class="ingredients">
-          <input type="checkbox" id="ingredient3" name="ingredient3" value="ingredient3">
-          <label for="ingredient3">ingredient3</label>
-          </div>
-        <div class="ingredients">
-          <input type="checkbox" id="ingredient2" name="ingredient2" value="ingredient2">
-          <label for="ingredient2">ingredient2</label>
-        </div>
-        <div class="ingredients">
-          <input type="checkbox" id="ingredient3" name="ingredient3" value="ingredient3">
-          <label for="ingredient3">ingredient3</label>
-        </div>
-        <div class="ingredients">
-          <input type="checkbox" id="ingredient2" name="ingredient2" value="ingredient2">
-          <label for="ingredient2">ingredient2</label>
-        </div>
-        <div class="ingredients">
-          <input type="checkbox" id="ingredient3" name="ingredient3" value="ingredient3">
-          <label for="ingredient3">ingredient3</label>
-        </div>
-
-
-
-      </div>
+      <textarea name="ingredients" id="ingredients" cols="30" rows="10" v-model="proto.ingredients"></textarea>
       <label for="Description">Description:</label>
       <textarea name="Description" id="Description" cols="30" rows="10" v-model="proto.description"></textarea>
       <label for="vegan">Vegan:</label>
@@ -77,29 +45,14 @@
   <div class="case" id="orderList">
     <h2>Orders</h2>
     <ul>
-      <li class="order" v-for="order in orders" :key="order.id">
-        <h2>{{ order.date }} <span class="size">{{order.Sandwichs.length}} sandwiches</span> </h2>
-        <ul>
-            <li class="sandInfos" v-for="sandwich in order.Sandwichs" :key="sandwich.id">
-                <p class="sandName">{{sandwich.name}}</p>
-                <p class="sandPrice">{{sandwich.price}} €</p>
-            </li>
-        </ul>
-      </li>
+      <order-component v-for="order in orders" :key="order.id" :order="order"/>
     </ul>
   </div>
 
   <div class="case" id="productCar">
     <div class="wrapper2">
-      <div class="sandwiche" v-for="sandwich in products" :key="sandwich.id">
-        <h2 class="name">{{sandwich.name}}</h2>
-        <h3 class="">{{sandwich.price}}€</h3>
-        <img :src="sandwich.image" alt="sandwiche">
-      </div>
-
-
+      <LittleSandwich v-for="sandwich in products" :key="sandwich.id" :sandwich="sandwich"/>
     </div>
-
   </div>
 
 
@@ -109,8 +62,12 @@
 
 <script>
 import axios from "axios";
+import OrderComponent from "@/components/orders/OrderComponent.vue";
+import LittleSandwich from "@/components/Sandwichs/LittleSandwich.vue";
+
 export default {
   name: "AdminView",
+  components: {LittleSandwich, OrderComponent},
   props: {
     User: Object,
   },
@@ -271,42 +228,13 @@ input{
   margin-top: 5px;
   font-size: 24px;
 }
-.ingredients{
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  text-align: center;
-  box-shadow: #333333;
 
-}
 img{
   width: 50px;
   height: auto;
   border-radius: 20px;
 }
-.sandwiche{
-  padding:5% 5%;
-}
-.name{
-  font-size: 1.2em;
-  font-weight: 400;
-  color: #333;
-}
-.sandName{
-  font-size: 1.2em;
-  font-weight: 400;
-  color: #333;
-}
-.sandPrice{
-  font-size: 1.2em;
-  font-weight: 400;
-  color: #333;
-}
-.size{
-  font-size: 0.8em;
-  font-weight: 400;
-  color: #333;
-}
+
 textarea{
   border: 1px solid #333;
   padding: 15px;

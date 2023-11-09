@@ -1,6 +1,6 @@
 <script setup>
 import axios from "axios";
-import LoaderAnim from "@/components/LoaderAnim.vue";
+import LoaderAnim from "@/components/utils/LoaderAnim.vue";
 
 </script>
 

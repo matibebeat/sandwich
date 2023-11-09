@@ -1,7 +1,7 @@
 <template>
   <div>
-    <img src="../assets/star.png" v-for="index in rate" :key="index" alt="" />
-    <img src="../assets/star.png" v-for="index in 5-rate" :key="index" alt="" />
+    <img src="../../assets/star.png" v-for="index in rate" :key="index" alt="" />
+    <img src="../../assets/star.png" v-for="index in 5-rate" :key="index" alt="" />
   </div>
 </template>
 

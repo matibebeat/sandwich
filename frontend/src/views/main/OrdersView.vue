@@ -22,7 +22,7 @@
 
 <script>
 import axios from "axios";
-import LoaderAnim from "@/components/LoaderAnim.vue";
+import LoaderAnim from "@/components/utils/LoaderAnim.vue";
 export default {
   name: "OrdersView",
   components: {LoaderAnim},
@@ -60,7 +60,12 @@ export default {
             });
           }
         }
-      })
+        if(this.orders.length==0){
+            this.loading = false;
+        }
+      }
+
+      )
       .catch((error) => {
         console.log(error);
       });

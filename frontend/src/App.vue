@@ -1,45 +1,15 @@
 <script setup>
-import { RouterLink, RouterView } from "vue-router";
+import FooterComponent from "@/components/Home/FooterComponent.vue";
+import HeaderComponent from "@/components/Home/HeaderComponent.vue";
+
 </script>
 
 <template>
-  <header>
-    <RouterLink id="Logo" to="/"><h1>Sandwiches</h1></RouterLink>
-    
-    <nav>
-      <RouterLink to="/products">Products</RouterLink>
-      <RouterLink to="/orders">Orders</RouterLink>
-      <RouterLink to="/shops">shops</RouterLink>
-    </nav>
-    <div class="UserNav">
-      <RouterLink to="/login" v-if="!this.connected">Login</RouterLink>
-      <RouterLink to="/register" v-if="!this.connected">Register</RouterLink>
-      <RouterLink to="/profile" v-show="this.connected" id="profile">{{ this.user.name }}</RouterLink>
-      <a href="#" v-if="this.connected" @click="logout">Logout</a>
-    </div>
-  </header>
+  <HeaderComponent @logout="logout" :connected="this.connected" :user="this.user"/>
 
   <RouterView class="site" :User="this.user" @login="log()"/>
-  <footer>
-    <div class="item">
-      <h3>Navigation</h3>
-      <RouterLink to="/">Home</RouterLink>
-      <RouterLink to="/products">Products</RouterLink>
-      <RouterLink to="/shops">Shops</RouterLink>
-    </div>
-    <div class="item">
-      <h3>Legal</h3>
-        <RouterLink to="/terms">Terms</RouterLink>
-        <RouterLink to="/privacy">Privacy</RouterLink>
-    </div>
-      <div class="item">
-        <h3>Follow us</h3>
-        <a href="https://www.facebook.com/">Facebook</a>
-        <a href="https://www.instagram.com/">Instagram</a>
-        <a href="https://twitter.com/">Twitter</a>
-      </div>
-  </footer>
-  
+  <FooterComponent/>
+
 </template>
 
 <script>
@@ -47,8 +17,7 @@ import { RouterLink, RouterView } from "vue-router";
 export default {
   name: "App",
   components: {
-    RouterLink,
-    RouterView,
+    HeaderComponent,
   },
   data() {
     return {
@@ -192,13 +161,7 @@ footer {
   border-radius: 20px 20px 20px 20px;
   margin-bottom:0;
 }
-footer .item {
-  width: 30%;
-  margin: 2%;
-  text-align: center;
-  display: flex;
-  flex-direction: column;
-}
+
 footer .item h3 {
   font-size: 1.5em;
   font-weight: 800;
@@ -238,8 +201,4 @@ button{
   color: white;
 }
 
-#profile{
-    background-color:  rgb(159, 246, 246);
-  color: black;
-}
 </style>

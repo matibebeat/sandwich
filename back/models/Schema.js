@@ -22,11 +22,18 @@ const UserSchema = mongoose.Schema({
     isAdmin: {type: Boolean, required: true},
 
 });
+const ReviewSchema = mongoose.Schema({
+    name: {type: String, required: true},
+    content: {type: String, required: true},
+    date: {type: Date, required: true},
+    grade: {type: Number, required: true},
+});
 
 const Sandwich = mongoose.model('sandwichs', SandwichSchema);
 const Order = mongoose.model('orders', OrderSchema);
 const User = mongoose.model('users', UserSchema);
+const Review = mongoose.model('reviews', ReviewSchema);
 
-const MySchema = {"Sandwich": Sandwich, "Order"  : Order, "User": User};
+const MySchema = {"Sandwich": Sandwich, "Order"  : Order, "User": User, "Review": Review};
 
 module.exports = MySchema;
