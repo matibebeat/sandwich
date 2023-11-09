@@ -28,7 +28,7 @@ h2 {
   font-size: 2em;
   font-weight: 800;
   color: #333;
-  margin-bottom: 0px;
+  margin-bottom: 0;
 }
 
 .sandName {

@@ -1,8 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const axios = require('axios');
-const { request } = require('express');
-const bodyParser = require('body-parser');
+
 const profileRoute = require('./routes/profile.js');
 const orderRoute = require('./routes/order.js');
 const sandwichRoute = require('./routes/sandwich.js');

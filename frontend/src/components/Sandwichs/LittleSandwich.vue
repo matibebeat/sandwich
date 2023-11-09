@@ -1,8 +1,8 @@
 <template>
-  <div class="sandwiche" >
+  <div class="sandwich" >
     <h2 class="name">{{sandwich.name}}</h2>
     <h3 class="">{{sandwich.price}}€</h3>
-    <img :src="sandwich.image" alt="sandwiche">
+    <img :src="sandwich.image" alt="sandwich">
   </div>
 </template>
 <script>
@@ -19,7 +19,7 @@ h2 {
   font-size: 2em;
   font-weight: 800;
   color: #333;
-  margin-bottom: 0px;
+  margin-bottom: 0;
 }
 
 h3 {
@@ -35,7 +35,7 @@ img {
   border-radius: 20px;
 }
 
-.sandwiche {
+.sandwich {
   padding: 5% 5%;
 }
 

@@ -30,7 +30,7 @@ export default {
 </script>
 <style scoped>
 header {
-  backdrop-filter: blur(10px); /* Flou sur la barre fixe */
+  backdrop-filter: blur(10px);
   z-index: 1;
   display: flex;
   flex-direction: row;
@@ -44,7 +44,7 @@ header {
   left: 10%;
   border-radius: 20px 20px 20px 20px;
   border-bottom: 2px solid black;
-  box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.75);
+  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.75);
 }
 
 .UserNav a {
@@ -76,7 +76,6 @@ nav a {
   text-decoration-color: red;
 }
 
-/*when a is hovered, it is underline progreeively by the left*/
 nav a:hover {
   text-decoration: underline;
   text-decoration-thickness: 0.2em;

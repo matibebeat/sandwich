@@ -1,9 +1,3 @@
-<script setup>
-import axios from "axios";
-import LoaderAnim from "@/components/utils/LoaderAnim.vue";
-
-</script>
-
 <template>
   <div class="modify">
     <h1>Modify sandwich</h1>
@@ -14,7 +8,7 @@ import LoaderAnim from "@/components/utils/LoaderAnim.vue";
       </div>
       <div>
         <label for="price">Price:</label>
-        <input type="double" @click="updateSandwich" name="price" id="price" placeholder="Price" v-model="sandwich.price">
+        <input type="number" @click="updateSandwich" name="price" id="price" placeholder="Price" v-model="sandwich.price">
       </div>
       <div>
         <label for="description">Description:</label>
@@ -39,7 +33,7 @@ import LoaderAnim from "@/components/utils/LoaderAnim.vue";
 
 <script>
 import axios from "axios";
-
+import LoaderAnim from "@/components/utils/LoaderAnim.vue";
 export default {
   name: "ModifySandwichView",
   components: { LoaderAnim },
@@ -91,7 +85,7 @@ export default {
 
 <style scoped>
 .modify {
-  margin-top: 0px;
+  margin-top: 0;
   width: 80%;
   padding: 10%;
   display: flex;

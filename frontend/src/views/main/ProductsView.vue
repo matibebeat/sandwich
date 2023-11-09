@@ -2,11 +2,11 @@
   <div class="product">
     <form action="">
       <select name="" id="">
-        <option value="">Trier par</option>
-        <option value="">Prix croissant</option>
-        <option value="">Prix décroissant</option>
-        <option value="">Nom croissant</option>
-        <option value="">Nom décroissant</option>
+        <option value="">Order by</option>
+        <option value="">increasing price</option>
+        <option value="">Decreasing price</option>
+        <option value="">increasing name</option>
+        <option value="">decreasing name</option>
       </select>
       <input
         type="checkbox"
@@ -15,7 +15,7 @@
         v-model="vegan"
         @change="filter()"
       />
-      <label for="vegan">Végétarien</label>
+      <label for="vegan">vegan</label>
       <input
         type="checkbox"
         name="stock"
@@ -46,7 +46,6 @@
 </template>
 
 <script>
-import { vModelCheckbox } from "vue";
 import SandwichCard from "../../components/Sandwichs/SandwichCard.vue";
 import axios from "axios";
 
@@ -60,52 +59,7 @@ export default {
     return {
       vegan: false,
       stock: false,
-      sandwiches: [
-        {
-          id: 1,
-          name: "Sandwich triangle",
-          price: 5,
-          ingredients: ["pain", "salade", "tomate"],
-          image:
-            "https://recipes.timesofindia.com/thumb/83740315.cms?width=1200&height=900",
-          vegan: false,
-          stock: true,
-          show: true,
-        },
-        {
-          id: 2,
-          name: "Sandwich italien",
-          price: 4.25,
-          ingredients: ["pain", "salade", "tomate", "oignon", "steak"],
-          image:
-            "https://hips.hearstapps.com/hmg-prod/images/italian-sandwich-recipe-2-1674500643.jpg?crop=0.6666666666666667xw:1xh;center,top&resize=1200:*",
-          vegan: false,
-          stock: true,
-          show: true,
-        },
-        {
-          id: 3,
-          name: "Sandwich ",
-          price: 1.5,
-          ingredients: ["pain", "jambon"],
-          image:
-            "https://upload.wikimedia.org/wikipedia/commons/2/24/Bologna_sandwich.jpg",
-          vegan: false,
-          stock: false,
-          show: true,
-        },
-        {
-          id: 4,
-          name: "Sandwich 4",
-          price: 5,
-          ingredients: ["pain", "salade", "tomate"],
-          image:
-            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ2cfu1kUkWTGxr-z2uyf9N3wmjRpjvaW6mzQRzaEnN6Q&s",
-          vegan: true,
-          stock: true,
-          show: true,
-        },
-      ],
+      sandwiches: [],
     };
   },
   mounted() {
@@ -126,11 +80,10 @@ export default {
   methods: {
     filter() {
       this.sandwiches.forEach((sandwich) => {
-        if (this.vegan && !sandwich.vegan) {
+        if((this.vegan && !sandwich.vegan) || (this.stock && !sandwich.stock))
+        {
           sandwich.show = false;
-        } else if (this.stock && !sandwich.stock) {
-          sandwich.show = false;
-        } else {
+        }else {
           sandwich.show = true;
         }
       });
@@ -141,7 +94,7 @@ export default {
 
 <style scoped>
 .product {
-  margin-top: 0px;
+  margin-top: 0;
   width: 80%;
   padding: 10%;
 }
@@ -179,7 +132,7 @@ form input[type="text"] {
   float: right;
 }
 
-/*augmente la taille des cases à cocher*/
+
 form input[type="checkbox"] {
   transform: scale(2);
   margin-right: 2%;
@@ -187,22 +140,14 @@ form input[type="checkbox"] {
   border-radius: 10px;
   border: 1px solid #333;
 }
-/*
 
-
-
- Grid of products
-
-
-
-*/
 
 .grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   grid-gap: 2em;
   margin-top: 2em;
-  margin-bottom: 0px;
-  padding-bottom: 0px;
+  margin-bottom: 0;
+  padding-bottom: 0;
 }
 </style>

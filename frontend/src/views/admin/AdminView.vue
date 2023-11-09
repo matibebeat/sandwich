@@ -118,7 +118,7 @@ export default {
                   this.orders[i].Sandwichs[j]
               )
               .then((response2) => {
-                /*ajoute le sandwich au tableau de sandwichs*/
+
                 this.orders[i].Sandwichs[j] = response2.data;
               })
               .catch((error) => {
@@ -141,10 +141,11 @@ export default {
       });
     /*loop over the order array, if it's the current month, add the income*/
     for (let i = 0; i < this.orders.length; i++) {
-      if (this.orders[i].date.slice(5, 7) == new Date().getMonth() + 1) {
+      if (this.orders[i].date.slice(5, 7) === `${new Date().getMonth() + 1}`) {
+
         this.MonthAmount += this.orders[i].price;
       } else if (
-        this.orders[i].date.slice(5, 7) == new Date().getMonth() &&
+        this.orders[i].date.slice(5, 7) === `${new Date().getMonth() + 1}` &&
         this.orders[i].date.slice(8, 10) > new Date().getDate()
       ) {
         this.MonthAmount += this.orders[i].price;
@@ -157,7 +158,7 @@ export default {
 <style scoped>
 .grid {
 
-  margin-top: 0px;
+  margin-top: 0;
   width: 80%;
   height: 100%;
   padding: 10%;
@@ -172,13 +173,13 @@ export default {
   background-color: white;
   border-radius: 20px;
   padding: 2% 5%;
-  box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.75);
+  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.75);
 }
 h2 {
   font-size: 2em;
   font-weight: 800;
   color: #333;
-  margin-bottom: 0px;
+  margin-bottom: 0;
 }
 h3 {
   margin-top: 10px;

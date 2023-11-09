@@ -12,9 +12,9 @@
       <router-link :to="'/modify/'+this.id">
         <img
             v-if="this.admin"
-            src="../../assets/reglages.png"
-            alt="reglages"
-            class="reglages"
+            src="../../assets/Settings.png"
+            alt="Settings"
+            class="settings"
 
         />
       </router-link>
@@ -24,7 +24,7 @@
 
     <div class="sandwichTitle">
       <h3>{{this.name}}</h3>
-      <p class="prix">
+      <p class="price">
         <strong>{{this.price}} € </strong>
       </p>
     </div>
@@ -49,9 +49,9 @@ export default {
         show: Boolean,
     },
     mounted() {
-      let sandwiche = document.getElementsByClassName("sandwich")[0];
-      if (this.stock == false) {
-        sandwiche.classList.add("true");
+      let sandwich = document.getElementsByClassName("sandwich")[0];
+      if (this.stock === false) {
+        sandwich.classList.add("true");
       }
     },
 };
@@ -77,17 +77,17 @@ export default {
     width: 100%;
     height: 70%;
     object-fit: cover;
-    border-radius: 10px 10px 0px 0px;
+    border-radius: 10px 10px 0 0;
   }
 
   .sandwich .image img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    border-radius: 10px 10px 0px 0px;
+    border-radius: 10px 10px 0 0;
   }
 
-  .sandwich .image .reglages {
+  .sandwich .image .settings {
     width: 50px;
     height: 50px;
     position: absolute;
@@ -98,12 +98,12 @@ export default {
     display: none;
   }
 
-  .sandwich .image .reglages:hover {
+  .sandwich .image .settings:hover {
     transform: scale(1.2);
     transition: 0.3s;
   }
 
-  .sandwich:hover .image .reglages {
+  .sandwich:hover .image .settings {
     display: block;
   }
 
@@ -120,9 +120,9 @@ export default {
     width: 96%;
     height: 70%;
     margin-top: 0;
-    border-radius: 10px 10px 0px 0px;
+    border-radius: 10px 10px 0 0;
     /*pu 2% padding everywhere but on the bottom*/
-    padding: 0% 2% 0 2%;
+    padding: 0 2% 0 2%;
     color: white;
     font-size: 1.4em;
 
@@ -138,23 +138,20 @@ export default {
   
   .sandwich h3 {
     font-size: 1.2em;
-    padding: 1em;
     margin: 0;
     font-weight: 400;
-    padding-bottom: 0;
+    padding: 1em 1em 0;
   }
   
   .sandwich .ingredients {
     font-size: 0.8em;
-    padding: 1em;
-    padding-left: 1.6em;
-    padding-top: 0.2em;
+    padding: 0.2em 1em 1em 1.6em;
     margin: 0;
     font-weight: 400;
     color: grey;
   }
   
-  .sandwich .prix {
+  .sandwich .price {
     font-size: 1.2em;
     padding: 1em;
     margin: 0;

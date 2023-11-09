@@ -2,24 +2,24 @@
   <div class="shop">
     <h1>Shops</h1>
     <div class="wrapper">
-      <div class="liste">
+      <div class="list">
         <ul>
           <li @click="this.loc = 'waterfront'">
             <h2>Waterfront</h2>
             <p>Address: 19 Dock Rd, V & A Waterfront, Cape Town, 8001</p>
             <h3>13:00 19:00</h3>
           </li>
-          <li @click="this.loc = 'seapoint'">
+          <li @click="this.loc = 'Seapoint'">
             <h2>Seapoint</h2>
             <p>Address: 19 Dock Rd, V & A Waterfront, Cape Town, 8001</p>
             <h3>13:00 19:00</h3>
           </li>
-          <li @click="this.loc = 'villejuif'">
+          <li @click="this.loc = 'Villejuif'">
             <h2>Efrei</h2>
             <p>Address: 32 avenue de la republique, villejuif 94800</p>
             <h3>08:00 21:00</h3>
           </li>
-          <li @click="this.loc = 'paris'">
+          <li @click="this.loc = 'Paris'">
             <h2>Tour Eiffel</h2>
             <p>Address: 5 avenue Anatole France, Paris 75007</p>
             <h3>13:00 19:00</h3>
@@ -80,7 +80,7 @@ export default {
 
 <style scoped>
 .shop {
-  margin-top: 0px;
+  margin-top: 0;
   width: 80%;
   padding: 10%;
 }
@@ -96,7 +96,7 @@ h1 {
   justify-content: space-between;
   flex-wrap: wrap;
 }
-.liste {
+.list {
   width: 40%;
   background-color: white;
   border-radius: 20px;

@@ -71,7 +71,7 @@
     </div>
     <AlertComponent type="update" message="Your profile has been updated"  v-if="this.showAlert" @close="showAlert = false"/>
     <AlertComponent type="error" message="An error has occurred, try latter"  v-if="this.showAlertError" @close="showAlertError = false"/>
-    <AlertComponent type="Choice" message="Do you want to delete your account ?, belek ca reviens pas après"  v-if="this.showAlertChoice" @close="showAlertChoice = false" @delete="deleteProfile"/>
+    <AlertComponent type="Choice" message="Do you want to delete your account ?, Warning it's forever"  v-if="this.showAlertChoice" @close="showAlertChoice = false" @delete="deleteProfile"/>
   </div>
 
 </template>
@@ -94,7 +94,7 @@ export default {
     /*retrieve user.id from local storage*/
     let user = localStorage.getItem("user");
     let id = JSON.parse(user)._id;
-    if(id == undefined){
+    if(id === undefined){
       id=JSON.parse(user).id;
     }
     /*fetch the user corresponding to the id*/

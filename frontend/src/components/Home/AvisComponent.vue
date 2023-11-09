@@ -17,8 +17,9 @@ export default {
   components: {StarRate},
   props: {
     review: {
-      type: Object,
-      required: true,
+      name: String,
+      grade: Number,
+      content: String,
     },
   },
 }
@@ -43,7 +44,6 @@ export default {
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
-  float: top;
 }
 
 .wrapper3item h4 {

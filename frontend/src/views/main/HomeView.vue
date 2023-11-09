@@ -3,12 +3,11 @@
     <h1>Home of the best sandwiches ever,</h1>
     <h1>Try it and you will love</h1>
     <img src="../../assets/sandwich.svg" alt="sandwich" />
-    <p class="main">
-      Lorem ipsum dolor sit a met, consectetur adipiscing elit. Nullam auctor,
-      nisl eget ultrum dolor sit a met, consectetur adipiscing elit. Nullicies
-      aliquam, nunc sapien aliquet nunc, eget luctus nisl nunc eum dolor sit a
-      met, consectetur adipiscing elit. Nullget nisl.
+    <div class="main">
+    <p>
+      Our sandwiches are made with the freshest ingredients and the most delicious recipes. We believe that a good sandwich can make your day better, and we strive to provide the best sandwiches ever. Whether you're a meat lover or a vegetarian, we have the perfect sandwich for you. Come and try our sandwiches, and we guarantee that you will love them!
     </p>
+    </div>
     <div class="mainButtons">
       <RouterLink to="/products">Products</RouterLink>
       <RouterLink to="/shops">stores</RouterLink>
@@ -16,11 +15,11 @@
     <div class="block2">
       <h2>Our lifestyle</h2>
       <div class="wrapper2">
-        <HomeInformations msg="lorem ipsum dolor sit a met, consectetur adipiscing elit. Nulla auctor, nisl eget ultrum dolor sit a met, consectetur  elit. Nullicies aliquam, nunc sapien aliquet nunc, eget luctus nislnunc eum dolor sit a met, consectetur adipiscing elit. Nullget nisl." url="tomato" Titre="Peacefull" />
+        <HomeInformation msg="Our sandwiches are made with locally sourced, fresh ingredients that are not only delicious but also good for your health. We believe in providing the best quality ingredients to our customers, so you can enjoy your sandwich guilt-free. Try our Peaceful sandwich made with fresh tomatoes and other healthy ingredients today!" url="tomato" Titre="Ingredients" />
 
-        <HomeInformations msg="lorem ipsum dolor sit a met, consectetur adipiscing elit. Nulla auctor, nisl eget ultrum dolor sit a met, consectetur  elit. Nullicies aliquam, nunc sapien aliquet nunc, eget luctus nislnunc eum dolor sit a met, consectetur adipiscing elit. Nullget nisl." url="steack" Titre="steak" />
+        <HomeInformation msg="We believe that treating our employees well is just as important as making delicious sandwiches. That's why we provide fair wages, benefits, and a positive work environment. Our employees are the backbone of our business, and we value their hard work and dedication. Come and support our mission of treating everyone with respect and kindness!" url="steak" Titre="Employee Treatment" />
 
-        <HomeInformations msg="lorem ipsum dolor sit a met, consectetur adipiscing elit. Nulla auctor, nisl eget ultrum dolor sit a met, consectetur  elit. Nullicies aliquam, nunc sapien aliquet nunc, eget luctus nislnunc eum dolor sit a met, consectetur adipiscing elit. Nullget nisl." url="salad" Titre="salad" />
+        <HomeInformation msg="At our sandwich shop, we take pride in our unique and original sandwich recipes. Our sandwiches are not only delicious, but they are also creative and innovative. We believe that a sandwich can be more than just a simple meal, it can be an experience. " url="salad" Titre="Originality" />
       </div>
     </div>
     <div class="block3">
@@ -36,11 +35,11 @@
 <script>
 import AvisComponent from "@/components/Home/AvisComponent.vue";
 import axios from "axios";
-import HomeInformations from "@/components/Home/HomeInformations.vue";
+import HomeInformation from "@/components/Home/HomeInformations.vue";
 
 export default {
   name: "HomeView",
-  components: {HomeInformations, AvisComponent },
+  components: { HomeInformation, AvisComponent },
   data: function () {
     return {
       reviews: [],
@@ -56,7 +55,7 @@ export default {
       .catch((error) => {
         console.log(error);
       });
-  }
+  },
 };
 </script>
 
@@ -82,7 +81,7 @@ img {
   transform: rotate(-15deg);
 }
 
-p.main {
+div.main {
   font-size: 1.2em;
   width: 50%;
   margin-top: 2em;
@@ -134,36 +133,6 @@ h2 {
   justify-content: space-between;
 }
 
-.wrapper2item {
-  margin: 10px;
-  padding: 0px;
-  background-color: white;
-  width: 50%;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  align-items: center;
-  text-align: justify;
-  border-radius: 25px;
-}
-
-.wrapper2item img {
-  position: inherit;
-  width: 50%;
-}
-.wrapper2item p {
-  padding: 10px 20px;
-  font-size: 0.9em;
-  line-height: 1.5em;
-  font-weight: 500;
-}
-#steak {
-  transform: rotate(120deg);
-}
-#salad {
-  transform: rotate(0deg);
-}
-
 .wrapper3 {
   padding: 2%;
 
@@ -175,41 +144,7 @@ h2 {
   justify-content: space-between;
   background-color: aliceblue;
 }
-.wrapper3item {
-  margin: 10px;
-  padding: 10px;
-  background-color: pink;
-  width: 30%;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  align-items: center;
-  text-align: justify;
-  border-radius: 25px;
-  height: auto;
-}
 
-.wrapper3item div {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-between;
-  float: top;
-}
-.wrapper3item .starRate {
-  width: 60%;
-}
-.wrapper3item h4 {
-  font-size: 1.2em;
-  font-weight: 800;
-  color: #333;
-}
-.wrapper3item p {
-  font-size: 1em;
-  line-height: 1.5em;
-  font-weight: 500;
-  text-align: justify;
-}
 .block3 {
   margin-top: 15em;
   width: 100%;

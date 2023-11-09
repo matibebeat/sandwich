@@ -2,7 +2,7 @@
   <div class="wrapper2item">
     <h3>{{ this.Titre }}</h3>
     <img src="../../assets/tomato.svg" alt="" v-if="this.url==='tomato'">
-    <img src="../../assets/steak.svg" alt="" id="steak" v-if="this.url==='steack'">
+    <img src="../../assets/steak.svg" alt="" id="steak" v-if="this.url==='steak'">
     <img src="../../assets/salad.png" alt="" id="salad" v-if="this.url==='salad'">
     <p>
       {{ this.msg }}
@@ -11,7 +11,7 @@
 </template>
 <script>
 export default {
-  name: 'HomeInformations',
+  name: 'HomeInformation',
   props: {
     msg: String,
     url: String,
@@ -30,7 +30,7 @@ img {
 
 .wrapper2item {
   margin: 10px;
-  padding: 0px;
+  padding: 0;
   background-color: white;
   width: 50%;
   display: flex;

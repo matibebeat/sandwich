@@ -27,8 +27,7 @@ export default {
                 const response = await fetch(
                     `http://localhost:4000/sandwich/${this.$route.params.id}`
                 );
-                const data = await response.json();
-                this.sandwich = data;
+              this.sandwich = await response.json();
             } catch (error) {
                 console.log(error);
             }
@@ -50,7 +49,7 @@ export default {
     background-color: white;
     padding: 20px;
     border-radius: 10px;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
     margin-top: 20px;
     display: flex;
     flex-direction: row;

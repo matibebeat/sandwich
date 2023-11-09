@@ -1,9 +1,3 @@
-<script setup>
-import FooterComponent from "@/components/Home/FooterComponent.vue";
-import HeaderComponent from "@/components/Home/HeaderComponent.vue";
-
-</script>
-
 <template>
   <HeaderComponent @logout="logout" :connected="this.connected" :user="this.user"/>
 
@@ -13,11 +7,14 @@ import HeaderComponent from "@/components/Home/HeaderComponent.vue";
 </template>
 
 <script>
+import FooterComponent from "@/components/Home/FooterComponent.vue";
+import HeaderComponent from "@/components/Home/HeaderComponent.vue";
 
 export default {
   name: "App",
   components: {
     HeaderComponent,
+    FooterComponent,
   },
   data() {
     return {
@@ -93,7 +90,7 @@ export default {
 
 <style scoped>
 header {
-  backdrop-filter: blur(10px); /* Flou sur la barre fixe */
+  backdrop-filter: blur(10px);
   z-index: 1;
   display: flex;
   flex-direction: row;
@@ -107,7 +104,7 @@ header {
   left: 10%;
   border-radius: 20px 20px 20px 20px;
   border-bottom: 2px solid black;
-  box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.75);
+  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.75);
 }
 .UserNav a {
   margin-left: 1em;
@@ -135,7 +132,6 @@ nav a {
   font-size: 1.2em;
   text-decoration-color: red;
 }
-/*when a is hovered, it is underline progreeively by the left*/
 nav a:hover {
   text-decoration: underline;
   text-decoration-thickness: 0.2em;

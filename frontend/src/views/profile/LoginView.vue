@@ -1,5 +1,3 @@
-/*make a vue page to login, with all the fonction to send a login request*/
-
 <template>
   <div class="login">
     <div class="login__container">
@@ -57,7 +55,7 @@ export default {
         .then((response) => {
           localStorage.setItem("token", response.data.token);
           console.log(response.data);
-          var user={
+          let user={
             name:response.data.name,
             email:response.data.email,
             address:response.data.address,
@@ -71,7 +69,7 @@ export default {
           this.$router.push("/");
         })
         .catch((error) => {
-          alert('adresse mail ou mdp incorect')
+          alert('incorrect email or password')
           console.log(error);
         });
     },

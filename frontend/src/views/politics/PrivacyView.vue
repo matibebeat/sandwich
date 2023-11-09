@@ -29,12 +29,12 @@ export default {
     <p>We use the information we collect in various ways, including to:</p>
 
     <ul>
-      <li>Provide, operate, and maintain our webste</li>
-      <li>Improve, personalize, and expand our webste</li>
-      <li>Understand and analyze how you use our webste</li>
+      <li>Provide, operate, and maintain our website</li>
+      <li>Improve, personalize, and expand our website</li>
+      <li>Understand and analyze how you use our website</li>
       <li>Develop new products, services, features, and functionality</li>
       <li>Communicate with you, either directly or through one of our partners, including for customer service, to provide you with updates and other information relating to the
-        webste, and for marketing and promotional purposes</li>
+        website, and for marketing and promotional purposes</li>
       <li>Send you emails</li>
       <li>Find and prevent fraud</li>
     </ul>
@@ -137,40 +137,4 @@ export default {
 
     margin-bottom: 0.25em;
   }
-
-  img {
-    position: absolute;
-    right: 10%;
-    width: 30%;
-    float: right;
-    transform: rotate(-15deg);
-  }
-
-  p.main {
-    font-size: 1.2em;
-    width: 50%;
-    margin-top: 2em;
-
-    line-height: 1.5em;
-  }
-
-  .mainButtons a {
-    margin-left: 1em;
-    border: none;
-    background: red;
-    padding: 20px 80px;
-    border-radius: 20px;
-    text-decoration: none;
-    color: white;
-  }
-  .mainButtons a:hover {
-    background: lightpink;
-  }
-
-  .mainButtons {
-    display: flex;
-    justify-content: center;
-    margin-top: 2em;
-  }
-
 </style>

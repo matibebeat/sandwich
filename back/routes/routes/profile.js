@@ -30,7 +30,7 @@ router.post('/register', (req, res) => {
             isAdmin: false,
         });
         user.save().then((data) => {
-            res.status(200).json({ message: "user added successfully" });
+            res.status(200).json({ message: "user created"});
         }).catch((err) => {
             res.status(500).send(err.message);
         });

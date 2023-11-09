@@ -28,8 +28,7 @@ export default {
   components: {LoaderAnim},
   props: {
     User: {
-      type: Object,
-      required: true,
+      name: String,
     },
   },
   data: function () {
@@ -51,7 +50,6 @@ export default {
           for (let j = 0; j < this.orders[i].Sandwichs.length; j++) {
             axios.get("http://localhost:4000/api/sandwich/"+this.orders[i].Sandwichs[j])
             .then((response2) => {
-                /*ajoute le sandwich au tableau de sandwichs*/
                 this.orders[i].Sandwichs[j] = response2.data;
                 this.loading = false;
             })
@@ -60,8 +58,8 @@ export default {
             });
           }
         }
-        if(this.orders.length==0){
-            this.loading = false;
+        if(this.orders.length === 0) {
+          this.loading = false;
         }
       }
 
@@ -75,7 +73,7 @@ export default {
 
 <style scoped>
 .orders {
-  margin-top: 0px;
+  margin-top: 0;
   width: 80%;
   padding: 10%;
 }
@@ -100,19 +98,17 @@ li{
 }
 h2{
     font-size: 1.4em;
-    padding: 1em;
-    margin: 0;
+  margin: 0;
     width:92%;
     font-weight: 600;
-    padding-bottom: 0;
-    border-bottom: #333 solid 1px;
+  padding: 1em 1em 0;
+  border-bottom: #333 solid 1px;
 }
 .size{
     font-size: 0.8em;
-    padding: 1em;
+    padding: 1em 1em 0;
     margin: 0;
     font-weight: 400;
-    padding-bottom: 0;
 }
 .sandInfos{
     width:80%;
