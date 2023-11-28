@@ -29,7 +29,7 @@
       <label for="name">Name:</label>
       <input type="text" id="name" name="name" v-model="proto.name">
       <label for="image">Image:</label>
-      <input type="text" id="image" name="image" v-model="proto.image">
+      <input type="file" id="image" name="image" @change="handleFileUpload">
       <label for="ingredients">Ingredients:</label>
       <textarea name="ingredients" id="ingredients" cols="30" rows="10" v-model="proto.ingredients"></textarea>
       <label for="Description">Description:</label>
@@ -73,6 +73,7 @@ export default {
   },
   data() {
     return {
+      selectedFile: null,
       orders: [],
       MonthAmount: 0,
       LastMonthAmount: 0,
@@ -90,16 +91,24 @@ export default {
     };
   },
   methods: {
+    handleFileUpload(event) {
+      this.selectedFile = event.target.files[0];
+    },
     CreateProduct() {
-      axios.post("http://localhost:4000/api/sandwich/", {
-        name: this.proto.name,
-        image: this.proto.image,
-        description: this.proto.description,
-        ingredients: ["test"],
-        price: this.proto.price,
-        vegan: this.proto.vegan,
-        stock: true,
+      event.preventDefault();
+      const formData = new FormData();
+      formData.append('name',this.proto.name)
+      formData.append('description',this.proto.description)
+      formData.append('price',this.proto.price)
+      formData.append('vegan', this.proto.vegan)
+      formData.append('ingredients',['test'])
+      formData.append('stock',true)
+      formData.append('image', this.selectedFile)
+      fetch("http://localhost:4000/api/sandwich/upload", {
+        method: "POST",
+        body: formData
       });
+
     },
   },
   mounted() {
