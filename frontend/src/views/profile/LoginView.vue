@@ -36,6 +36,7 @@
 <script>
 /*import axios*/
 import axios from "axios";
+import { jwtDecode }   from 'jwt-decode';
 
 export default {
   name: "LoginView",
@@ -53,15 +54,17 @@ export default {
           password: this.password,
         })
         .then((response) => {
-          localStorage.setItem("token", response.data.token);
+
           console.log(response.data);
+          localStorage.setItem("token", response.data);
+          const decoded = jwtDecode(response.data);
           let user={
-            name:response.data.name,
-            email:response.data.email,
-            address:response.data.address,
-            phone:response.data.phone,
-            admin:response.data.isAdmin,
-            id:response.data._id,
+            name:decoded.user.name,
+            email:decoded.user.email,
+            address:decoded.user.address,
+            phone:decoded.user.phone,
+            admin:decoded.user.isAdmin,
+            id:decoded.user._id,
           }
           localStorage.setItem("user", JSON.stringify(user));
           this.$emit("login");

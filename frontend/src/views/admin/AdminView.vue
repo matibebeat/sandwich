@@ -107,10 +107,10 @@ export default {
       .get("http://localhost:4000/api/order/")
       .then((response) => {
         this.orders = response.data;
-        console.log(this.orders);
         for (let i = 0; i < this.orders.length; i++) {
           this.orders[i].date = this.orders[i].date.slice(0, 10);
           this.orders[i].price = this.orders[i].price + "€";
+          console.log(this.orders[i].status);
           for (let j = 0; j < this.orders[i].Sandwichs.length; j++) {
             axios
               .get(
@@ -134,7 +134,6 @@ export default {
       .get("http://localhost:4000/api/sandwich/")
       .then((response) => {
         this.products = response.data;
-        console.log(this.products);
       })
       .catch((error) => {
         console.log(error);

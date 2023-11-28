@@ -1,15 +1,17 @@
 const express = require('express');
-
+const jwt = require('jsonwebtoken');
 const router = express.Router();
 
 const Schemas = require("../../models/Schema");
 router.post('/login', (req, res) => {
 
         Schemas.User.findOne({ email: req.body.email }).then((user) => {
-            console.log(req.body.password);
             if (user.password === req.body.password) {
                 console.log(user);
-                res.status(200).send(user);
+                const token = jwt.sign({ user : user }, "secret", { expiresIn: 86400 });
+
+                console.log(token);
+                res.status(200).send(token);
             }
             else {
                 res.status(500).json({ message: "user not found" });
@@ -38,10 +40,13 @@ router.post('/register', (req, res) => {
 );
 
 
+
+
+
 router.get('/:id', (req, res) => {
-        console.log(req.params.id);
         Schemas.User.findById(req.params.id).then((user) => {
-            res.json(user);
+            const token = jwt.sign({ user : user }, "secret", { expiresIn: 86400 });
+            res.json(token);
         }).catch((err) => {
             res.status(500).send(err.message);
         });

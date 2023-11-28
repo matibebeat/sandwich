@@ -23,6 +23,7 @@
         <input type="text" @click="updateSandwich" name="ingredients" id="ingredients" placeholder="Ingredients" v-model="sandwich.ingredients">
       </div>
       <button type="submit" @click="updateSandwich">Update</button>
+      <button @click="sup">Delete</button>
     </form>
   </div>
 
@@ -50,7 +51,6 @@ export default {
         .get("http://localhost:4000/api/sandwich/"+id)
         .then((response) => {
           this.sandwich = response.data;
-          console.log(this.sandwich);
           this.loading = false;
         })
         .catch((error) => {
@@ -66,7 +66,6 @@ export default {
       axios
         .put("http://localhost:4000/api/sandwich/"+this.sandwich._id, this.sandwich)
         .then((response) => {
-          console.log(response);
           /*hide the loader*/
           this.loading = false;
           alert("Sandwich updated");
@@ -76,7 +75,24 @@ export default {
         .catch((error) => {
           console.log(error);
         });
-    }
+    },
+    sup() {
+      /*show the loader*/
+      this.loading = true;
+      /*delete the sandwich in the database*/
+      axios
+        .delete("http://localhost:4000/api/sandwich/"+this.sandwich._id)
+        .then((response) => {
+          /*hide the loader*/
+          this.loading = false;
+          alert("Sandwich deleted");
+          /*return to product page*/
+          this.$router.push("/products");
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    },
   }
 };
 

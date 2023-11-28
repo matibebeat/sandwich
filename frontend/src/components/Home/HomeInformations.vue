@@ -59,4 +59,11 @@ img {
 #salad {
   transform: rotate(0deg);
 }
+
+@media screen and (max-width: 768px) {
+  .wrapper2item {
+    width: 100%;
+  }
+
+}
 </style>

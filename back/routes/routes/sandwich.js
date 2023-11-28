@@ -50,4 +50,15 @@ router.put('/:id', (req, res) => {
     }
 );
 
+router.delete('/:id', (req, res) => {
+        Schemas.Sandwich.findByIdAndDelete(req.params.id).then((sandwich) => {
+            res.json(sandwich);
+        }).catch((err) => {
+            res.status(500).send(err.message);
+        });
+    }
+
+
+
+);
 module.exports = router;

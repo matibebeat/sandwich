@@ -13,4 +13,14 @@ router.get('/', (req, res) => {
     }
 );
 
+router.post('/', (req, res) => {
+        Schemas.Review.create(req.body).then((review) => {
+            res.json(review);
+        }).catch((err) => {
+            res.status(500).send(err.message);
+        });
+    }
+);
+
+
 module.exports = router;

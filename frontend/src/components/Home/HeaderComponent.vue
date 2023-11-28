@@ -1,5 +1,6 @@
 <script setup>
 import { RouterLink } from "vue-router";
+import PanierComponent from "@/components/Home/PanierComponent.vue";
 </script>
 
 <template>
@@ -8,24 +9,34 @@ import { RouterLink } from "vue-router";
 
     <nav>
       <RouterLink to="/products">Products</RouterLink>
-      <RouterLink to="/orders">Orders</RouterLink>
-      <RouterLink to="/shops">shops</RouterLink>
+      <RouterLink to="/admin" v-if="user.admin">Dashboard</RouterLink>
+      <RouterLink to="/orders" v-else>Orders</RouterLink>
+      <RouterLink to="/shops" v-if="!user.admin">shops</RouterLink>
+
     </nav>
     <div class="UserNav">
       <RouterLink to="/login" v-if="!this.connected">Login</RouterLink>
       <RouterLink to="/register" v-if="!this.connected">Register</RouterLink>
-      <RouterLink to="/profile" v-show="this.connected" id="profile">{{ this.user.name }}</RouterLink>
-      <a href="#" v-if="this.connected" @click="$emit('logout')">Logout</a>
+      <RouterLink to="/profile" v-show="this.connected" id="profile" @mouseover="this.show=true">{{ this.user.name }}</RouterLink>
+      <a href="#" v-if="this.connected" @click="$emit('logout')" >Logout</a>
     </div>
+    <PanierComponent :panier="this.panier" :show="this.show" @mouseleave="this.show=false" @removeSandwich="$emit('removeSandwich',$event)"/>
   </header>
 </template>
 <script>
+
 export default {
   name: 'HeaderComponent',
   props: {
     connected: Boolean,
     user: Object,
-  }
+    panier: Object,
+  },
+  data() {
+    return {
+      show: false,
+    };
+  },
 }
 </script>
 <style scoped>
@@ -106,5 +117,28 @@ button {
 #profile {
   background-color: rgb(159, 246, 246);
   color: black;
+}
+@media screen and (max-width: 768px) {
+  header {
+    position: relative !important;
+    flex-direction: column !important;
+    text-align: center;
+  }
+  h1{
+    width: 100%;
+  }
+  a{
+    margin: 5px 0 !important;
+  }
+  nav {
+    width:100%;
+    display: flex;
+    flex-direction: column;
+  }
+  .UserNav {
+    width:100%;
+    display: flex;
+    flex-direction: column;
+  }
 }
 </style>

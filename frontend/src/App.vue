@@ -1,7 +1,7 @@
 <template>
-  <HeaderComponent @logout="logout" :connected="this.connected" :user="this.user"/>
+  <HeaderComponent @logout="logout" :connected="this.connected" :user="this.user" :panier="this.panier" @removeSandwich="suprPanier($event)"/>
 
-  <RouterView class="site" :User="this.user" @login="log()"/>
+  <RouterView class="site" :User="this.user" @login="log()" @buy="buy($event)" :panier="this.panier" @confirmOrder="order"/>
   <FooterComponent/>
 
 </template>
@@ -9,6 +9,7 @@
 <script>
 import FooterComponent from "@/components/Home/FooterComponent.vue";
 import HeaderComponent from "@/components/Home/HeaderComponent.vue";
+import axios from "axios";
 
 export default {
   name: "App",
@@ -25,15 +26,18 @@ export default {
         password: "  ",
         role: "  ",
         id: 1,
-        admin: true,
-      }
+        isAdmin: false,
+      },
+      panier: [],
     };
+  },
+  beforeUnmount() {
+    this.setPanier();
   },
 
   mounted() {
     try{
       this.user = JSON.parse(localStorage.getItem("user"));
-      console.log(this.user);
       if(this.user==null){
         this.user = {
           name: "John Doe",
@@ -41,7 +45,7 @@ export default {
           password: "  ",
           role: "  ",
           id: 1,
-          admin: false,
+          isAdmin: false,
         };
         this.connected = false;
       }
@@ -56,16 +60,18 @@ export default {
         password: "  ",
         role: "  ",
         id: 1,
-        admin: false,
+        isAdmin: false,
       };
       this.connected = false;
     }
-    console.log(this.connected);
+    this.getPanier();
   },
   methods: {
     logout() {
       localStorage.removeItem("user");
       localStorage.removeItem("token");
+      localStorage.removeItem("panier");
+      this.panier = [];
       this.connected = false;
       this.user = {
         name: "John Doe",
@@ -73,15 +79,79 @@ export default {
         password: "  ",
         role: "  ",
         id: 1,
-        admin: false,
+        isAdmin: false,
       };
     },
     log() {
       this.user = JSON.parse(localStorage.getItem("user"));
       this.connected = true;
     },
+    buy(obj) {
+      /*check if the sandwich already in panier*/
+      for (let i = 0; i < this.panier.length; i++) {
+        if (this.panier[i].id === obj.id) {
+          this.panier[i].quantity += obj.quantity;
+          return;
+        }
+      }
+      let sandwich = {
+        id: obj.id,
+        quantity: obj.quantity,
+      };
+      this.panier.push(sandwich);
+    },
+    getPanier() {
+      try {
+        this.panier = JSON.parse(localStorage.getItem("panier"));
+        if (this.panier == null) {
+          this.panier = [];
+        }
+      } catch (e) {
+        this.panier = [];
+      }
+    },
+    setPanier(){
+        localStorage.setItem("panier", JSON.stringify(this.panier));
+        console.log("update");
+      },
+    suprPanier(id) {
+      console.log(id);
+      for (let i = 0; i < this.panier.length; i++) {
+        if (this.panier[i].id === id) {
+          this.panier.splice(i, 1);
+          this.setPanier();
+          return;
+        }
+      }
+    },
+    order() {
+
+      this.setPanier();
+      var sandwichs= [];
+      for (let i = 0; i < this.panier.length; i++) {
+        for (let j = 0; j < this.panier[i].quantity; j++) {
+          sandwichs.push(this.panier[i].id);
+        }
+      }
+      console.log(sandwichs);
+      axios.post("http://localhost:4000/api/order", {
+        user: this.user.id,
+        Sandwichs: sandwichs,
+        price: 0,
+        date: new Date(),
+      })
+          .then(() => {
+            alert("Order has been posted!");
+            this.panier = [];
+            localStorage.removeItem("panier");
+          })
+          .catch((error) => {
+            console.error(error);
+          });
+    },
   },
 };
+
 
 
 </script>
@@ -196,5 +266,9 @@ button{
   text-decoration: none;
   color: white;
 }
-
+@media  screen and (max-width: 768px)  {
+  footer{
+    display: none;
+  }
+}
 </style>

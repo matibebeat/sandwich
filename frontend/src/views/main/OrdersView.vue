@@ -43,7 +43,6 @@ export default {
       .get("http://localhost:4000/api/order/"+this.User.id)
       .then((response) => {
         this.orders = response.data;
-        console.log(this.orders);
         for (let i = 0; i < this.orders.length; i++) {
           this.orders[i].date = this.orders[i].date.slice(0, 10);
           this.orders[i].price = this.orders[i].price + "€";

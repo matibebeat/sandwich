@@ -7,6 +7,8 @@
     <p>
       Our sandwiches are made with the freshest ingredients and the most delicious recipes. We believe that a good sandwich can make your day better, and we strive to provide the best sandwiches ever. Whether you're a meat lover or a vegetarian, we have the perfect sandwich for you. Come and try our sandwiches, and we guarantee that you will love them!
     </p>
+
+
     </div>
     <div class="mainButtons">
       <RouterLink to="/products">Products</RouterLink>
@@ -28,6 +30,8 @@
         <AvisComponent v-for="review in reviews" :review="review" />
 
       </div>
+        <RouterLink to="/reviews" class="button">Add your review</RouterLink>
+
     </div>
   </div>
 </template>
@@ -50,7 +54,6 @@ export default {
       .get("http://localhost:4000/api/review")
       .then((response) => {
         this.reviews = response.data;
-        console.log(this.reviews);
       })
       .catch((error) => {
         console.log(error);
@@ -149,5 +152,63 @@ h2 {
   margin-top: 15em;
   width: 100%;
   height: 100%;
+}
+@media  screen and (max-width: 768px)  {
+  h1{
+    font-size: 2.5em;
+    width: 100%;
+    text-align: justify;
+  }
+  .home{
+    width: 100%;
+  }
+  img{
+    width: 100%;
+    position: relative;
+    right: 0;
+    transform: rotate(20deg);
+  }
+  div.main{
+    width: 100%;
+    text-align: justify;
+  }
+  .mainButtons{
+    width: 100%;
+    padding-left: 0;
+    margin-top: 2em;
+    justify-content: space-around;
+  }
+  .mainButtons a{
+    padding: 10px 40px;
+  }
+  .block2{
+    margin-top: 5em;
+  }
+  .wrapper2{
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .block3{
+    margin-top: 5em;
+  }
+.wrapper3{
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+}
+.button{
+  margin-left: 1em;
+  border: none;
+  background: red;
+  padding: 15px 20px;
+  border-radius: 20px;
+  text-decoration: none;
+  color: white;
+  position: relative;
+  left:42%;
+  transform: translateX(-50%);
 }
 </style>

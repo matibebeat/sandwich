@@ -9,9 +9,10 @@ const SandwichSchema = mongoose.Schema({
 });
 const OrderSchema = mongoose.Schema({
     idUser: {type: String, required: true},
-
+    Sandwichs: {type: Array, required: true},
     price: {type: Number, required: true},
     date: {type: Date, required: true},
+    status : {type: String, required: true},
 });
 const UserSchema = mongoose.Schema({
     name: {type: String, required: true},

@@ -58,4 +58,9 @@ export default {
   font-weight: 500;
   text-align: justify;
 }
+@media screen and (max-width: 768px) {
+  .wrapper3item {
+    width: 80%;
+  }
+}
 </style>

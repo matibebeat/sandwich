@@ -47,15 +47,21 @@ and run in another shell, to run the backend:
 
 - ## profile
     * create
-    * read
+    * read *2
     * update
     * delete
 
 - ## Sandwichs
     * create
-    * read
+    * read *2
     * update
-
+    * delete
 
 - ## Order
+    * create
+    * read *2
+    * update
+
+- ## Reviews
+    * create
     * read

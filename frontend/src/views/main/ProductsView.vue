@@ -1,6 +1,6 @@
 <template>
   <div class="product">
-    <form action="">
+    <form action="" v-show="false">
       <select name="" id="">
         <option value="">Order by</option>
         <option value="">increasing price</option>
@@ -28,8 +28,10 @@
     </form>
     <div class="grid">
       <SandwichCard
+
           :admin="this.User.admin"
         v-for="sand in sandwiches"
+
         :key="sand._id"
         :id="sand._id"
         :name="sand.name"
@@ -40,6 +42,7 @@
         :stock="sand.stock"
         :vegan="sand.vegan"
         :show="sand.show"
+          @buy="$emit('buy', $event)"
       />
     </div>
   </div>
@@ -63,12 +66,10 @@ export default {
     };
   },
   mounted() {
-    console.log("cc");
     axios
       .get("http://localhost:4000/api/sandwich")
       .then((response) => {
         this.sandwiches = response.data;
-        console.log(this.sandwiches);
         for (let i = 0; i < this.sandwiches.length; i++) {
           this.sandwiches[i].show = true;
         }
@@ -149,5 +150,16 @@ form input[type="checkbox"] {
   margin-top: 2em;
   margin-bottom: 0;
   padding-bottom: 0;
+}
+@media  screen and (max-width: 768px)  {
+  .grid {
+    grid-template-columns: repeat(1, 1fr);
+  }
+  form{
+    display: flex;
+    flex-direction: column;
+    width: 80%;
+  }
+
 }
 </style>

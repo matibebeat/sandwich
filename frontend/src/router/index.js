@@ -1,5 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/main/HomeView.vue'
+import { jwtDecode }   from 'jwt-decode';
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -60,12 +61,12 @@ const router = createRouter({
       name: "admin",
       path: "/admin",
       component: () => import('../views/admin/AdminView.vue'),
-      meta: { requiresAuth: true }
+      meta: { requiresAdmin: true }
     },
     {
-      name: 'profile',
-      path: "/profile",
-      component: () => import('../views/profile/ProfileView.vue'),
+      name: 'update',
+      path: "/update",
+      component: () => import('../views/profile/UpdateProfile.vue'),
       meta: {requiresAuth: true}
     },
     {
@@ -73,6 +74,21 @@ const router = createRouter({
         path: "/privacy",
         component: () => import('../views/politics/PrivacyView.vue')
     },
+    {
+      name: 'profile',
+        path: "/profile",
+        component: () => import('../views/profile/ProfileInfosView.vue')
+    },
+    {
+      name: 'reviews',
+        path: "/reviews",
+        component: () => import('../views/profile/ReviewView.vue')
+    },
+    {
+      name: 'buy',
+        path: "/buy",
+        component: () => import('../views/main/CommandView.vue')
+    }
   ]
 })
 
@@ -86,7 +102,24 @@ router.beforeEach((to, from, next) => {
       next('/login');
     }
   } else {
-    next();
+    if (to.meta.requiresAdmin){
+      const token = localStorage.getItem('token');
+      if (token) {
+        const decoded = jwtDecode(token);
+        if (decoded.user.isAdmin) {
+          next();
+        } else {
+          next('/');
+        }
+      } else {
+        next('/login');
+      }
+
+
+
+    }else{
+        next();
+    }
     }
 }
 );
